@@ -1,11 +1,18 @@
 package com.skillsync.entity;
 
+import java.util.List;
+import java.util.ArrayList;
+
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 
 @Entity
+@Table(name = "skillsync_user")
 public class User {
    
     @Id
@@ -17,6 +24,11 @@ public class User {
     private String email;
 
     private String password;
+
+    @OneToMany(mappedBy = "owner",
+        cascade = CascadeType.ALL,
+        orphanRemoval = true)
+    private List<Project> projects;
 
     public User() {
 
