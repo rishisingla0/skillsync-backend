@@ -1,18 +1,13 @@
 package com.skillsync.entity;
 
-import java.util.List;
-import java.util.ArrayList;
+import java.util.*;
 
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
+import jakarta.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
-@Table(name = "skillsync_user")
+@Table(name = "users")
 public class User {
    
     @Id
@@ -21,6 +16,7 @@ public class User {
     
     private String name;
 
+    @Column(unique = true, nullable = false)
     private String email;
 
     private String password;
@@ -28,7 +24,8 @@ public class User {
     @OneToMany(mappedBy = "owner",
         cascade = CascadeType.ALL,
         orphanRemoval = true)
-    private List<Project> projects;
+    @JsonManagedReference
+    private List<Project> projects = new ArrayList<>();
 
     public User() {
 
@@ -63,5 +60,31 @@ public class User {
     }
     public String getPassword() {
         return password;
+    }
+
+    public void addProject(Project project) {
+        projects.add(project);
+        project.setOwner(this);
+    }
+
+    public List<Project> getProjects() {
+        return projects;
+    }
+
+    @ManyToMany
+    @JoinTable(
+        name = "user_skill",
+        joinColumns = @JoinColumn(name = "user_id"),
+        inverseJoinColumns = @JoinColumn(name = "skill_id")
+    )
+    private List<Skill> skills = new ArrayList<>();
+
+    public void addSkill(Skill skill) {
+        skills.add(skill);
+        skill.getUsers().add(this);
+    }
+
+    public List<Skill> getSkills() {
+        return skills;
     }
 }

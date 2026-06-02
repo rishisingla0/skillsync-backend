@@ -2,8 +2,10 @@ package com.skillsync.entity;
 
 import jakarta.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
-@Table(name = "project")
+@Table(name = "projects")
 public class Project {
     
     @Id
@@ -15,6 +17,7 @@ public class Project {
 
     @ManyToOne 
     @JoinColumn(name = "owner_id")
+    @JsonBackReference
     private User owner;
 
     public Project() {
