@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>SkillSync</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+
+    <body>
+
+        <h1>SkillSync</h1>
+
+        <div class="card">
+        <h2>Create User</h2>
+        <input type="text" id="name" placeholder="Name"> 
+        <input type="email" id="email" placeholder="Email"> 
+        <input type="password" id="password" placeholder="Password"> 
+        <button onclick="createUser()">
+            createUser
+        </button>
+        <p id="result"></p>
+        </div>
+
+        <div class="card">
+        <h2>Create Skill</h2>
+        <input type="text" id="skillName" placeholder="Skill Name">
+        <button onclick="createSkill()">
+            Add Skill   
+        </button>
+        <p id="skillResult"></p>
+        </div>
+
+        <div class="card">
+            <h2>Add Project</h2>
+            <input type="number" id="projectUserId" placeholder="User id"> 
+            <input type="text" id="projectTitle" placeholder="Project Title"> 
+            <input type="text" id="projectDescription" placeholder="Description">
+            <button onclick="createProject()">
+                Add Project
+            </button>
+            <p id="projectResult"></p>
+        </div>
+
+        <div class="card">
+            <h2>Assign Skill to User</h2>
+            <input type="number" id="assignUserId" placeholder="User ID">
+            <input type="number" id="assignSkillId" placeholder="Skill ID">
+            <button onclick="assignSkill()" placeholder="Skill ID">
+                Assign Skill    
+            </button>
+            <p id="assignResult"></p>
+        </div>
+
+        <div class="card">
+            <h2>Search Projects By Skill</h2>
+            <input type="text" id="searchSkill" placelder="Skill Name">
+            <button onclick="searchProjects()">
+                Search
+            </button>
+            <div id="searchResults"></div>
+        </div>
+
+        <script src="script.js"></script>
+    </body>
+</html>

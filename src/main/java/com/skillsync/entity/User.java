@@ -23,7 +23,8 @@ public class User {
 
     @OneToMany(mappedBy = "owner",
         cascade = CascadeType.ALL,
-        orphanRemoval = true)
+        orphanRemoval = true,
+    fetch = FetchType.EAGER)
     @JsonManagedReference
     private List<Project> projects = new ArrayList<>();
 
